@@ -32,6 +32,7 @@ To run this project, install it locally using git clone command.
 After that, go to the root directory and write in your terminal:
 
 $ npm install
+
 $ npm run start
 
 After that, you'll see carousel running!
