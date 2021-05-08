@@ -7,25 +7,30 @@ import TestContent from './components/testContent1/TestContent1';
 
 import './App.css'
 const App = () => {
-    const imgArr = [slide1,slide2,slide3,slide1,slide2];
-    const contentArr= [
+
+const contentArr= [
         {
-        img:slide1,
-        content: ''
+        img:slide1, 
+        content: '1'
         },
+
         {
         img: slide2,
-        content: ''
+        content: '2'
         },
+
         {
         img:slide3,
-        content:''
+        content:'3'
         },
 
         {img:slide1,
        content:<TestContent /> },
+
         {img:'',
-        content: <TestContent />}];
+        content: <TestContent />}
+    ];
+
     return(
         <div id='app'>
             <Carousel contentArr={contentArr}/>
