@@ -1,0 +1,22 @@
+.currentImgDiv {
+margin: 0 30px;
+user-select: unset;
+z-index: 999;
+}
+
+.leftImgDiv {
+    cursor:pointer !important;
+}
+
+.rightImgDiv {
+ cursor:pointer !important;
+ 
+}
+
+.grabbing {
+    cursor:grabbing !important;
+}
+
+.noDisplay {
+    display: none;
+}

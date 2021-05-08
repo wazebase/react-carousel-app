@@ -1,0 +1,12 @@
+#slide-select {
+    color: black;
+    margin-right: 5px;
+}
+
+#numset {
+    display: inline-flex;
+}
+
+#total-num {
+    margin-left: 5px;
+}
