@@ -68,7 +68,7 @@ It will look like this:
 const contentArr= [
         {
         img:slide1, //here goes your img
-        content: <MyComponent /> //here goes your component
+        content: <TestContent /> //here goes your component
         },
 
         {
