@@ -1,5 +1,5 @@
 .currentImgDiv {
-margin: 0 30px;
+margin: 0 20px;
 user-select: unset;
 z-index: 999;
 }
@@ -10,7 +10,6 @@ z-index: 999;
 
 .rightImgDiv {
  cursor:pointer !important;
- 
 }
 
 .grabbing {

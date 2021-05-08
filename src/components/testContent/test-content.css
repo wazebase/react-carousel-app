@@ -8,3 +8,11 @@
    grid-gap: 10px;
    color: black;
 }
+h1 {
+    font-size: 25px;
+}
+#slide-num {
+    justify-self:start;
+    text-align: start;
+    color:red;
+}
