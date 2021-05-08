@@ -9,6 +9,7 @@ import TestContent2 from './components/testContent/TestContent2';
 import './App.css'
 const App = () => {
 
+//array with content that goes inside the carousel
 const contentArr= [
         {
         img:slide1, 

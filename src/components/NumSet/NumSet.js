@@ -9,7 +9,7 @@ const NumSet = ({totalNum,currentSlideNum,setCurrentSlideNum}) => {
         let number = i + 1;
         numArr.push(number);
     }
-
+    //sets slide number to the one that is chosen in options
     const changeSlideNum = (e) => {
             setCurrentSlideNum(parseInt(e));
     }

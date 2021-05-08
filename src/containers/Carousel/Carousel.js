@@ -5,6 +5,7 @@ import NumSet from '../../components/NumSet/NumSet';
 import './carousel.css';
 
 const Carousel = ({ contentArr }) => {
+  
   const [currentSlideNum, setCurrentSlideNum] = useState(1);
   const [startPos, setStartPos] = useState(0);
   const [currentTranslate,setCurrentTranslate] = useState(0);

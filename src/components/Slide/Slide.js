@@ -21,6 +21,9 @@ const Slide = ({ imgUrl, slideNum,
 
   let clientWidth = document.documentElement.clientWidth;
 
+  //positioning logic
+
+  //checks is current slide
   useEffect(() => {
     if (currentSlideNum === slideNum) {
       setSlideStyle(styles.currentImgDiv);
@@ -28,6 +31,7 @@ const Slide = ({ imgUrl, slideNum,
     }
   }, [currentSlideNum])
 
+  //checks if the slide is left to current slide
   useEffect(() => {
     if (currentSlideNum === slideNum - 1 ||
       (slideNum === 1 && currentSlideNum === totalNum)) {
@@ -37,6 +41,7 @@ const Slide = ({ imgUrl, slideNum,
     }
   }, [currentSlideNum])
 
+    //checks if the slide is right to current slide
   useEffect(() => {
     if (currentSlideNum === slideNum + 1 ||
       (slideNum === totalNum && currentSlideNum === 1)) {
@@ -46,6 +51,7 @@ const Slide = ({ imgUrl, slideNum,
     }
   }, [currentSlideNum])
 
+  //checks if slide should not be on the screen yet
   useEffect(() => {
     if ((currentSlideNum >= slideNum + 2 && !(slideNum === 1 && currentSlideNum === totalNum))
       ||
@@ -58,10 +64,13 @@ const Slide = ({ imgUrl, slideNum,
 
   //animation logic
 
+
   useEffect(() => {
+    //if slide is being dragged sets the style to coursor
     if (isDragging) {
       setGrabbingStyle(styles.grabbing);
     }
+    //clear the state if dragging stops
     else {
       setGrabbingStyle('');
       setCurrentTranslate(0);
@@ -69,6 +78,7 @@ const Slide = ({ imgUrl, slideNum,
     }
   }, [isDragging]);
 
+  //sets the offset for the left and right slide
   useEffect(() => {
 
     if (!current && left) {
@@ -82,6 +92,7 @@ const Slide = ({ imgUrl, slideNum,
     }
   }, [left, current])
 
+  //changes transition time when slide changes, then sets again
   useEffect(() => {
 
     setTransition(.8);
