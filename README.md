@@ -101,5 +101,5 @@ Finally, set your array as a prop to Carousel component inside your return state
         </div>
     )
 ```
-That's all, folks!
+Basically, that's it. Feel free to use it!
     
