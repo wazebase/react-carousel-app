@@ -54,7 +54,7 @@ import slide3 from './images/slide3.jpeg';
 The carousel is designed in a way that you can pass your components inside your slides. If you want to insert them:
 
 ```javascript
-import slide1 from './images/slide1.jpeg';
+import TestContent from './components/testContent1/TestContent1';
 ```
 
 Inside of your return, pass into Carousel component. It accepts an array as a props. In array, you can put an object where:
@@ -73,9 +73,11 @@ const contentArr= [
         {
         img: slide2,
         content: '2'
-        },```
+        },
+```
         
 If you don't want to have either picture or content in your slide, leave them as an empty string: 
+
 ```javascript 
 
 {       
@@ -90,6 +92,7 @@ content: <TestContent />
 ```
 
 Finally, set your array as a prop to Carousel component inside your return statement: 
+
 ```javascript
    return(
         <div id='app'>
