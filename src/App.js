@@ -24,8 +24,7 @@ const contentArr= [
         {
         img:slide6,
         content:'3'
-        },
-        
+        }      
     ];
 
     return(

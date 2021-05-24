@@ -1,0 +1,8 @@
+#slides-container {
+    height: 80vh;
+    display: inline-flex;
+    margin-top: 30px;
+    overflow: hidden;
+    transform: translateX(0);
+    cursor:grab;
+}

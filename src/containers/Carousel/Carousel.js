@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
+
 import NumSet from '../../components/NumSet/NumSet';
+import Slider from "../../components/Slider/Slider";
 
 import './carousel.css';
-import Slider from "../../components/Slider/Slider";
 
 const Carousel = ({ contentArr }) => {
   //NB! make sure to reload the page if you change screen size

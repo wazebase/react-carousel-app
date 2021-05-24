@@ -1,6 +1,6 @@
 import Slide from '../Slide/Slide';
-import React, { useEffect, useRef,useState } from 'react';
-
+import React, { useEffect, useRef } from 'react';
+import './slider.css';
 
 const Slider = ({ contentArr, totalNum, currentSlideNum, setSlideChanged, numSetNum }) => {
   const animationRef = useRef();
