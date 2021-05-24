@@ -1,7 +1,7 @@
 import React from 'react';
-import slide1 from './images/slide1.jpeg';
-import slide2 from './images/slide2.jpeg';
-import slide3 from './images/slide3.jpeg';
+import slide5 from './images/slide5.jpeg';
+import slide6 from './images/slide6.jpeg';
+import slide4 from './images/slide4.jpeg';
 import Carousel from './containers/Carousel/Carousel';
 import TestContent1 from './components/testContent/TestContent1';
 import TestContent2 from './components/testContent/TestContent2';
@@ -12,25 +12,20 @@ const App = () => {
 //array with content that goes inside the carousel
 const contentArr= [
         {
-        img:slide1, 
+        img:slide4, 
         content: '1'
         },
 
         {
-        img: slide2,
+        img: slide5,
         content: '2'
         },
 
         {
-        img:slide3,
+        img:slide6,
         content:'3'
         },
-
-        {img:slide1,
-        content:<TestContent1 /> },
-
-        {img:'',
-        content: <TestContent2 />}
+        
     ];
 
     return(

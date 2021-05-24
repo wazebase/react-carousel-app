@@ -1,7 +1,7 @@
 import React from 'react';
 import './numset.css';
 
-const NumSet = ({totalNum,currentSlideNum,setCurrentSlideNum}) => {
+const NumSet = ({totalNum,numSetNum,setNumSetNum}) => {
    
     const numArr = [];
     
@@ -11,12 +11,12 @@ const NumSet = ({totalNum,currentSlideNum,setCurrentSlideNum}) => {
     }
     //sets slide number to the one that is chosen in options
     const changeSlideNum = (e) => {
-            setCurrentSlideNum(parseInt(e));
+        setNumSetNum(parseInt(e));
     }
 
     return(
         <div id='numset'>
-            <select id='slide-select' value={currentSlideNum} onChange ={(e)=>changeSlideNum(e.target.value)} name='numbers'>
+            <select id='slide-select' value = {numSetNum} onChange ={(e)=>changeSlideNum(e.target.value)} name='numbers'>
             {numArr.map(number=>
             <option key={number} value={number}>{number}</option>)}
             </select>

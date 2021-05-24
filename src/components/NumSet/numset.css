@@ -4,7 +4,10 @@
 }
 
 #numset {
+    margin-top: 20px;
     display: inline-flex;
+    position: relative;
+    left:45%;
 }
 
 #total-num {

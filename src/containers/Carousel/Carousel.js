@@ -1,37 +1,30 @@
-import React, { useState } from "react";
-import Slide from '../../components/Slide/Slide';
+import React, { useState, useRef, useEffect } from "react";
 import NumSet from '../../components/NumSet/NumSet';
 
 import './carousel.css';
+import Slider from "../../components/Slider/Slider";
 
 const Carousel = ({ contentArr }) => {
-  
-  const [currentSlideNum, setCurrentSlideNum] = useState(1);
-  const [startPos, setStartPos] = useState(0);
-  const [currentTranslate,setCurrentTranslate] = useState(0);
-  const [endPos,setEndPos] = useState(0); 
-  const [transition,setTransition] = useState(.3);
-
+  //NB! make sure to reload the page if you change screen size
+  const currentSlideNum = useRef(1);
+  const [numSetNum,setNumSetNum] = useState(1);
   const totalNum = contentArr.length;
+  const [slideChanged,setSlideChanged] = useState(false);
+
+  useEffect(()=> {
+    if(slideChanged) {
+      setNumSetNum(currentSlideNum.current);
+    }
+  return ()=> setSlideChanged(false);
+  },[slideChanged])
 
   return (
     <div id='carousel'>
       <h3>Welcome to my Carousel demo!</h3>
-      <div id='slides-container'>
-
-      {contentArr.map((content, i) => 
-      <Slide currentSlideNum={currentSlideNum} setCurrentSlideNum={setCurrentSlideNum}
-      slideNum={i + 1} key={i} totalNum={totalNum}
-      imgUrl={content.img} content={content.content}
-      startPos={startPos} setStartPos={setStartPos}
-      endPos={endPos} setEndPos={setEndPos}
-      currentTranslate={currentTranslate} setCurrentTranslate={setCurrentTranslate}
-      transition={transition} setTransition={setTransition}/>)}
-   
-     </div>
-   
-     <NumSet currentSlideNum={currentSlideNum}
-        setCurrentSlideNum={setCurrentSlideNum} totalNum={totalNum} />
+      <Slider contentArr={contentArr} totalNum={totalNum} numSetNum={numSetNum}
+      currentSlideNum={currentSlideNum} slideChanged={slideChanged} setSlideChanged={setSlideChanged}/>
+     <NumSet numSetNum={numSetNum} setNumSetNum={setNumSetNum} currentSlideNum={currentSlideNum}
+      totalNum={totalNum} />
      
       </div>
   )
