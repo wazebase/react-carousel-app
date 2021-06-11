@@ -1,4 +1,4 @@
-#slides-container {
+.slides-container {
     height: 80vh;
     display: inline-flex;
     margin-top: 30px;

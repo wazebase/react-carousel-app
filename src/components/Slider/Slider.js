@@ -1,43 +1,62 @@
-import Slide from '../Slide/Slide';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable no-param-reassign */
 import React, { useEffect, useRef } from 'react';
+import Slide from '../Slide/Slide';
 import './slider.css';
 
-const Slider = ({ contentArr, totalNum, currentSlideNum, setSlideChanged, numSetNum }) => {
+const Slider = ({
+  contentArr, totalNum, currentSlideNum, setSlideChanged, slideSelectNum, slideNumArr,
+}) => {
   const animationRef = useRef();
-  const slidesRef = useRef('slider');
+  const slidesRef = useRef();
   const currentTranslate = useRef(0);
   const prevTranslate = useRef(0);
-  const dragging = useRef(false);
-  const slideChangeArr = useRef([]);
+  const slideChangeArr = useRef(slideNumArr);
   const startPos = useRef(0);
-  let clientWidth = document.documentElement.clientWidth;
-
-  //sets up an array with all the positions for the slide change
+  const dragging = useRef(false);
+  const slowTransition = useRef(false);
+  const { clientWidth } = document.documentElement;
+  const dist = clientWidth / 9.2;
+  // sets up an array with all the positions for the slide change
   useEffect(() => {
-    for (let i = 0; i < totalNum; i++) {
-      let changePos = -clientWidth * i;
-      slideChangeArr.current.push(changePos);
-    }
-  }, [])
-    
-  //changes slides position if a number was selected in numset component
-  useEffect(() => {
-    currentSlideNum.current = numSetNum;
-    changeSlidesPos();
-  }, [numSetNum])
-
-  function setSliderPosition() {
-    if (!dragging.current)
-      setTransitionOnSlideChange();
-    slidesRef.current.style.transform = `translateX(${currentTranslate.current}px)`
-  }
+    // eslint-disable-next-line no-return-assign
+    slideChangeArr.current.forEach((_el, i) => slideChangeArr.current[i] = -clientWidth * i);
+  }, []);
 
   function setTransitionOnSlideChange() {
-    slidesRef.current.style.transition = `transform .8s ease-out`;
+    if (slowTransition.current) {
+      slidesRef.current.style.transition = 'transform 1s ease-out';
+      slowTransition.current = false;
+    } else {
+      slidesRef.current.style.transition = 'transform .5s ease-out';
+    }
     setTimeout(() => {
-      slidesRef.current.style.transition = `transform .2s ease-out`;
-    }, 800)
+      slidesRef.current.style.transition = 'transform .2s ease-out';
+    }, 500);
   }
+
+  function setSliderPosition() {
+    if (!dragging.current) setTransitionOnSlideChange();
+    slidesRef.current.style.transform = `translateX(${currentTranslate.current}px)`;
+  }
+
+  // sets up slide for the new position
+  const changeSlidesPos = () => {
+    currentTranslate.current = slideChangeArr.current[currentSlideNum.current - 1];
+    prevTranslate.current = currentTranslate.current;
+    setSlideChanged(true);
+    setSliderPosition();
+  };
+
+  // changes slides position if a number was selected in numset component
+  useEffect(() => {
+    if (Math.abs(currentSlideNum.current - slideSelectNum) > 1) {
+      slowTransition.current = true;
+    }
+
+    currentSlideNum.current = slideSelectNum;
+    changeSlidesPos();
+  }, [slideSelectNum]);
 
   function animation() {
     if (dragging.current) {
@@ -47,44 +66,37 @@ const Slider = ({ contentArr, totalNum, currentSlideNum, setSlideChanged, numSet
   }
 
   function getPositionX(event) {
-    return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX
-  }
-
-  //sets up slide for the new position
-  const changeSlidesPos = () => {
-    currentTranslate.current = slideChangeArr.current[currentSlideNum.current - 1];
-    prevTranslate.current = currentTranslate.current;
-    setSlideChanged(true);
-    setSliderPosition();
+    return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
   }
 
   const changeSlideNum = () => {
-    if (currentTranslate.current < -clientWidth / 7.2 + slideChangeArr.current[currentSlideNum.current - 1]) {
+    const slideDistChange = slideChangeArr.current[currentSlideNum.current - 1];
+
+    if (currentTranslate.current < -dist + slideDistChange) {
       if (currentSlideNum.current !== totalNum) {
         currentSlideNum.current += 1;
       }
-    }
-    else if (currentTranslate.current > slideChangeArr.current[currentSlideNum.current - 1] + clientWidth / 7.2) {
+    } else if (currentTranslate.current > slideDistChange + dist) {
       if (currentSlideNum.current !== 1) {
         currentSlideNum.current -= 1;
       }
     }
-  }
+  };
 
   const handleSwipeStart = (e) => {
-    let newStartPos = getPositionX(e);
+    const newStartPos = getPositionX(e);
     startPos.current = newStartPos;
     dragging.current = true;
     slidesRef.current.style.cursor = 'grabbing';
     animationRef.current = requestAnimationFrame(animation);
-  }
+  };
 
   const handleSwipeMove = (e) => {
     if (dragging.current) {
-      let newCurrentPos = getPositionX(e);
+      const newCurrentPos = getPositionX(e);
       currentTranslate.current = prevTranslate.current + newCurrentPos - startPos.current;
     }
-  }
+  };
 
   const handleSwipeEnd = () => {
     if (dragging.current) {
@@ -94,10 +106,11 @@ const Slider = ({ contentArr, totalNum, currentSlideNum, setSlideChanged, numSet
       cancelAnimationFrame(animationRef.current);
       changeSlidesPos();
     }
-  }
+  };
 
   return (
-    <div id='slides-container'
+    <div
+      className="slides-container"
       ref={slidesRef}
       onTouchStart={(e) => handleSwipeStart(e)}
       onTouchMove={(e) => handleSwipeMove(e)}
@@ -107,15 +120,16 @@ const Slider = ({ contentArr, totalNum, currentSlideNum, setSlideChanged, numSet
       onMouseUp={(e) => handleSwipeEnd(e)}
       onMouseLeave={(e) => handleSwipeEnd(e)}
     >
-      {contentArr.map((slide, i) =>
+      {contentArr.map((slide, i) => (
         <Slide
-          key={i + 1}
+          key={slide.id}
           slideNum={i + 1}
           content={slide.content}
           imgUrl={slide.img}
-        />)}
+        />
+      ))}
     </div>
-  )
-}
+  );
+};
 
 export default Slider;

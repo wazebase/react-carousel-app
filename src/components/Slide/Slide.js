@@ -1,24 +1,24 @@
-import React, { useRef,useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import './img-div.css';
 
-const Slide = ({content,imgUrl}) => {
-  const slideRef = useRef('slide');
+const Slide = ({ content, imgUrl }) => {
+  const slideRef = useRef();
 
-  useEffect(()=> {
+  useEffect(() => {
     slideRef.current.style.background = `url(${imgUrl})`;
-  },[])
+  }, []);
 
   return (
     <>
-      <div id='img-div'
-        ref = {slideRef}
-        className='slide'>
+      <div
+        className="img-div slide"
+        ref={slideRef}
+      >
         {content}
       </div>
 
     </>
-  )
-}
-
+  );
+};
 
 export default Slide;
