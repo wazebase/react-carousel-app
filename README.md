@@ -61,6 +61,7 @@ import TestContent from './components/testContent1/TestContent1';
 Inside of your return, pass into Carousel component. It accepts an array as a props. In array, you can put an object where:
 * **img** as image you put for the background. Accepts imported images only.
 * **content** as the content you want to put inside your slide. Accepts React components, strings and simple strings.
+* **id** as id for every slide. Should be a different number for every object.
 
 It will look like this: 
 
@@ -68,12 +69,14 @@ It will look like this:
 const contentArr= [
         {
         img:slide1, //here goes your img
-        content: <TestContent /> //here goes your component
+        content: <TestContent /> //here goes your component,
+        id: 455
         },
 
         {
         img: slide2,
-        content: '2'
+        content: '2',
+        id: 233
         },
 ```
         
@@ -83,12 +86,14 @@ If you don't want to have either picture or content in your slide, leave them as
 
 {       
 img:slide1,
-content:''
+content:'',
+id: 200
 },
 
 {
 img:'',
-content: <TestContent />
+content: <TestContent />,
+id: 353
 }
 ```
 
