@@ -20,7 +20,17 @@ const App = () => {
       content: '2',
       id: 345,
     },
+    {
+      img: slide4,
+      content: '1',
+      id: 151,
+    },
 
+    {
+      img: slide5,
+      content: '2',
+      id: 335,
+    },
     {
       img: slide6,
       content: '3',

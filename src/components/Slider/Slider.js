@@ -1,5 +1,5 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-param-reassign */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useRef } from 'react';
 import Slide from '../Slide/Slide';
 import './slider.css';
@@ -17,19 +17,20 @@ const Slider = ({
   const slowTransition = useRef(false);
   const { clientWidth } = document.documentElement;
   const dist = clientWidth / 9.2;
+
   // sets up an array with all the positions for the slide change
   useEffect(() => {
-    // eslint-disable-next-line no-return-assign
-    slideChangeArr.current.forEach((_el, i) => slideChangeArr.current[i] = -clientWidth * i);
+    slideChangeArr.current.forEach((_el, i) => {
+      const position = -clientWidth * i;
+      slideChangeArr.current[i] = position;
+    });
   }, []);
 
   function setTransitionOnSlideChange() {
-    if (slowTransition.current) {
-      slidesRef.current.style.transition = 'transform 1s ease-out';
-      slowTransition.current = false;
-    } else {
-      slidesRef.current.style.transition = 'transform .5s ease-out';
-    }
+    const changeAmount = slowTransition.current;
+    const transSeconds = 0.5 + 0.15 * changeAmount;
+    slidesRef.current.style.transition = `transform ${transSeconds}s ease-out`;
+    slowTransition.current = 0;
     setTimeout(() => {
       slidesRef.current.style.transition = 'transform .2s ease-out';
     }, 500);
@@ -50,10 +51,10 @@ const Slider = ({
 
   // changes slides position if a number was selected in numset component
   useEffect(() => {
-    if (Math.abs(currentSlideNum.current - slideSelectNum) > 1) {
-      slowTransition.current = true;
+    const slideChangeGap = Math.abs(currentSlideNum.current - slideSelectNum);
+    if (slideChangeGap > 1) {
+      slowTransition.current = slideChangeGap;
     }
-
     currentSlideNum.current = slideSelectNum;
     changeSlidesPos();
   }, [slideSelectNum]);

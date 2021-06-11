@@ -7,9 +7,14 @@ const SlideSelect = ({ slideSelectNum, setSlideSelectNum, slideNumArr }) => {
     setSlideSelectNum(parseInt(e.target.value, 10));
   };
 
+  const isChecked = (number) => {
+    const checkIfChecked = slideSelectNum === number;
+    return checkIfChecked;
+  };
+
   return (
     <div className="slideselect" onChange={(e) => changeSlideNum(e)}>
-      {slideNumArr.map((number) => <input className="radio" type="radio" key={number} value={number} checked={slideSelectNum === number} />)}
+      {slideNumArr.map((number) => <input className="radio" type="radio" key={number} readOnly value={number} checked={isChecked(number)} />)}
     </div>
   );
 };
