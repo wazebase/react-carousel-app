@@ -70,13 +70,13 @@ const contentArr= [
         {
         img:slide1, //here goes your img
         content: <TestContent /> //here goes your component,
-        id:455
+        id: 455
         },
 
         {
         img: slide2,
         content: '2',
-        id:233
+        id: 233
         },
 ```
         
@@ -87,13 +87,13 @@ If you don't want to have either picture or content in your slide, leave them as
 {       
 img:slide1,
 content:'',
-id:200
+id: 200
 },
 
 {
 img:'',
 content: <TestContent />,
-id:353
+id: 353
 }
 ```
 
