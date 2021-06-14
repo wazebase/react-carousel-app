@@ -4,7 +4,6 @@ import slide6 from './images/slide6.jpeg';
 import slide4 from './images/slide4.jpeg';
 import Carousel from './containers/Carousel/Carousel';
 import TestContent from './components/testContent/TestContent1';
-
 import './App.css';
 
 const App = () => {
@@ -28,14 +27,9 @@ const App = () => {
     },
 
     {
-      img: slide5,
-      content: '2',
-      id: 335,
-    },
-    {
       img: slide6,
-      content: '3',
-      id: 545,
+      content: '',
+      id: 335,
     },
   ];
 
