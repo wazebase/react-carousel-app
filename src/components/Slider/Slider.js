@@ -5,7 +5,8 @@ import Slide from '../Slide/Slide';
 import './slider.css';
 
 const Slider = ({
-  contentArr, totalNum, currentSlideNum, setSlideChanged, slideSelectNum, slideNumArr,
+  contentArr, totalNum, currentSlideNum, setCurrentSlideNum,
+  setSlideChanged, slideSelectNum, slideNumArr,
 }) => {
   const animationRef = useRef();
   const slidesRef = useRef();
@@ -27,8 +28,9 @@ const Slider = ({
   }, []);
 
   function setTransitionOnSlideChange() {
+    // calculates how many seconds will transition require
     const changeAmount = slowTransition.current;
-    const transSeconds = 0.5 + 0.15 * changeAmount;
+    const transSeconds = 0.5 + 0.17 * changeAmount;
     slidesRef.current.style.transition = `transform ${transSeconds}s ease-out`;
     slowTransition.current = 0;
     setTimeout(() => {
@@ -42,8 +44,10 @@ const Slider = ({
   }
 
   // sets up slide for the new position
-  const changeSlidesPos = () => {
-    currentTranslate.current = slideChangeArr.current[currentSlideNum.current - 1];
+  const changeSlidesPos = (newNum) => {
+    // if newNum is passed, changes slide position according to newNum
+    const changedNum = newNum || currentSlideNum;
+    currentTranslate.current = slideChangeArr.current[changedNum - 1];
     prevTranslate.current = currentTranslate.current;
     setSlideChanged(true);
     setSliderPosition();
@@ -51,12 +55,15 @@ const Slider = ({
 
   // changes slides position if a number was selected in numset component
   useEffect(() => {
-    const slideChangeGap = Math.abs(currentSlideNum.current - slideSelectNum);
+    // calculates the difference between slides and applies to ref
+    const slideChangeGap = Math.abs(currentSlideNum - slideSelectNum);
     if (slideChangeGap > 1) {
       slowTransition.current = slideChangeGap;
     }
-    currentSlideNum.current = slideSelectNum;
-    changeSlidesPos();
+    setCurrentSlideNum(slideSelectNum);
+    // passing slide number as argument to trigger slider pos change
+    // it is kind of wierd but the best I came up with so far
+    changeSlidesPos(slideSelectNum);
   }, [slideSelectNum]);
 
   function animation() {
@@ -71,15 +78,15 @@ const Slider = ({
   }
 
   const changeSlideNum = () => {
-    const slideDistChange = slideChangeArr.current[currentSlideNum.current - 1];
+    const slideDistChange = slideChangeArr.current[currentSlideNum - 1];
 
     if (currentTranslate.current < -dist + slideDistChange) {
-      if (currentSlideNum.current !== totalNum) {
-        currentSlideNum.current += 1;
+      if (currentSlideNum !== totalNum) {
+        setCurrentSlideNum(currentSlideNum + 1);
       }
     } else if (currentTranslate.current > slideDistChange + dist) {
-      if (currentSlideNum.current !== 1) {
-        currentSlideNum.current -= 1;
+      if (currentSlideNum !== 1) {
+        setCurrentSlideNum(currentSlideNum - 1);
       }
     }
   };
@@ -125,9 +132,10 @@ const Slider = ({
         <Slide
           key={slide.id}
           slideNum={i + 1}
-          content={slide.content}
           imgUrl={slide.img}
-        />
+        >
+          {slide.content}
+        </Slide>
       ))}
     </div>
   );

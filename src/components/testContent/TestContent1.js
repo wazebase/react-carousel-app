@@ -1,12 +1,12 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
 import './test-content.css';
+import song from '../../music/blues-run-the-game.mp3';
 
 const TestContent1 = () => (
   <div className="test-content">
-    <p className="slide-num">4</p>
-    <h1>Test content 1</h1>
-    {/*  <iframe src="https://www.youtube.com/embed/GDQRRWECaec" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-            */}
+    <h3>Or as components. Here is some audio for an example</h3>
+    <audio controls src={song} />
   </div>
 );
 

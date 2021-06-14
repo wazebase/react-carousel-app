@@ -14,7 +14,16 @@ const SlideSelect = ({ slideSelectNum, setSlideSelectNum, slideNumArr }) => {
 
   return (
     <div className="slideselect" onChange={(e) => changeSlideNum(e)}>
-      {slideNumArr.map((number) => <input className="radio" type="radio" key={number} readOnly value={number} checked={isChecked(number)} />)}
+      {slideNumArr.map((number) => (
+        <input
+          className="radio"
+          type="radio"
+          key={number}
+          readOnly
+          value={number}
+          checked={isChecked(number)}
+        />
+      ))}
     </div>
   );
 };

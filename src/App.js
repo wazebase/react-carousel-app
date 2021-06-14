@@ -3,6 +3,7 @@ import slide5 from './images/slide5.jpeg';
 import slide6 from './images/slide6.jpeg';
 import slide4 from './images/slide4.jpeg';
 import Carousel from './containers/Carousel/Carousel';
+import TestContent from './components/testContent/TestContent1';
 
 import './App.css';
 
@@ -11,18 +12,18 @@ const App = () => {
   const contentArr = [
     {
       img: slide4,
-      content: '1',
+      content: <div><h3>Any HTML content is valid</h3></div>,
       id: 150,
     },
 
     {
       img: slide5,
-      content: '2',
+      content: 'I can also pass strings',
       id: 345,
     },
     {
       img: slide4,
-      content: '1',
+      content: <TestContent />,
       id: 151,
     },
 

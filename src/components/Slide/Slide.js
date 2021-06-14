@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import './img-div.css';
 
-const Slide = ({ content, imgUrl }) => {
+const Slide = ({ children, imgUrl }) => {
   const slideRef = useRef();
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const Slide = ({ content, imgUrl }) => {
         className="img-div slide"
         ref={slideRef}
       >
-        {content}
+        {children}
       </div>
 
     </>
