@@ -3,9 +3,13 @@
 import React, { useEffect, useRef } from 'react';
 import Slide from '../Slide/Slide';
 import './slider.css';
+// eslint-disable-next-line no-unused-vars
+import slide6 from '../../images/slide6.jpeg';
+import slide4 from '../../images/slide4.jpeg';
+import slide5 from '../../images/slide5.jpeg';
 
 const Slider = ({
-  contentArr, totalNum, currentSlideNum, setCurrentSlideNum,
+  totalNum, currentSlideNum, setCurrentSlideNum,
   setSlideChanged, slideSelectNum, slideNumArr,
 }) => {
   const animationRef = useRef();
@@ -131,18 +135,46 @@ const Slider = ({
       onMouseUp={(e) => handleSwipeEnd(e)}
       onMouseLeave={(e) => handleSwipeEnd(e)}
     >
-      {contentArr.map((slide, i) => (
-        <Slide
-          key={slide.id}
-          slideNum={i + 1}
-          imgUrl={slide.img}
-        >
-          {
-          /* now passing content as children */
-          slide.content
-          }
-        </Slide>
-      ))}
+      <Slide
+        key={233}
+        slideNum={1}
+        imgUrl={slide4}
+      >
+        <h3>Also works</h3>
+      </Slide>
+
+      <Slide
+        key={333}
+        slideNum={2}
+        imgUrl={slide5}
+      >
+        <h3>This way</h3>
+      </Slide>
+
+      <Slide
+        key={133}
+        slideNum={3}
+        imgUrl={slide6}
+      >
+        <h3>But</h3>
+      </Slide>
+
+      <Slide
+        key={253}
+        slideNum={4}
+        imgUrl={slide4}
+      >
+        <h3>I prefer</h3>
+      </Slide>
+
+      <Slide
+        key={234}
+        slideNum={5}
+        imgUrl={slide5}
+      >
+        <h3>The other way</h3>
+      </Slide>
+
     </div>
   );
 };

@@ -9,8 +9,8 @@ const Carousel = ({ contentArr }) => {
   // NB! make sure to reload the page if you change screen size
   const [currentSlideNum, setCurrentSlideNum] = useState(1);
   const [slideSelectNum, setSlideSelectNum] = useState(1);
-  const totalNum = contentArr.length;
-  const slideNumArr = contentArr.map((el, i) => i + 1);
+  const slideNumArr = [1, 2, 3, 4, 5];
+  const totalNum = slideNumArr.length;
   const [slideChanged, setSlideChanged] = useState(false);
 
   useEffect(() => {
